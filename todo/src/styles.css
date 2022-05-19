@@ -1,0 +1,14 @@
+:root {
+  --deep-purple: #6601eb;
+}
+
+body {
+  background-color: #e0ccfb;
+}
+
+h2 {
+  display: inline-flex;
+  align-items: flex-start;
+  max-width: 100%;
+  background-color: var(--deep-purple);
+}

@@ -1,0 +1,128 @@
+<div class="container-fluid">
+  <div class="container">
+    <div class="row my-4" style="height: auto">
+      <div class="col"></div>
+      <div class="col-md-6 shadow main-plate">
+        <div class="mb-3 text-center text-uppercase">
+          <h2
+            class="text-white px-3 pt-2 pb-2 mt-1 shadow rounded purple-border"
+          >
+            To Do list
+          </h2>
+        </div>
+
+        <div class="m-3">
+          <div class="input-group bg-white shadow rounded purple-border">
+            <input
+              type="text"
+              class="form-control border-0 text-center w-100 my-2"
+              placeholder="Enter your task"
+              name="task"
+              [(ngModel)]="addTaskValue"
+              (keyup.enter)="addTask()"
+            />
+            <button
+              class="btn btn-outline-success btn-round m-auto mt-1 mb-3"
+              type="button"
+              (click)="addTask()"
+              [disabled]="addTaskValue.trim().length < 1"
+            >
+              <span class="material-symbols-outlined"> add </span>
+            </button>
+          </div>
+        </div>
+
+        <div [hidden]="taskArr.length < 1">
+          <h4 class="mt-5 text-white text-center text-uppercase">Tasks</h4>
+          <span class="material-symbols-outlined arrow-color">
+            keyboard_double_arrow_down
+          </span>
+        </div>
+        <div>
+          <div class="m-3 text-center" *ngFor="let task of taskArr">
+            <div class="input-group shadow rounded purple-border checked">
+              <div class="form-control border-0 checked">
+                <div class="">
+                  <h5 class="my-3">{{ task.task_name }}</h5>
+                </div>
+                <div class="justify-content-center mt-1 mb-2">
+                  <div
+                    class="form-check form-switch d-flex justify-content-center mb-2"
+                  >
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      role="switch"
+                      id="flexSwitchCheckDefault"
+                      (click)="checkTask(task)"
+                      [checked]="task.checked"
+                    />
+                  </div>
+                  <button
+                    class="btn btn-outline-primary col me-2 btn-round"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    type="button"
+                    (click)="call(task)"
+                  >
+                    <span class="material-symbols-outlined"> edit </span>
+                  </button>
+                  <button
+                    class="btn btn-outline-danger col btn-round"
+                    (click)="deleteTask(task)"
+                  >
+                    <span class="material-symbols-outlined"> delete </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>
+
+<!-- modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title w-100 ms-4" id="exampleModalLabel">Edit task</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group p-3">
+          <input
+            type="text"
+            class="form-control rounded w-100 text-center"
+            placeholder="Enter task"
+            name="task"
+            [(ngModel)]="editTaskValue"
+          />
+          <button
+            class="btn btn-outline-success btn-round m-auto mt-4"
+            type="button"
+            data-bs-dismiss="modal"
+            (click)="editTask()"
+            [disabled]="editTaskValue.trim().length < 1"
+          >
+            <span class="material-symbols-outlined"> update </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
